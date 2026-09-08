@@ -11,9 +11,7 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     zlib1g-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd zip bcmath intl opcache \
-    && pecl install sysvsem \
-    && docker-php-ext-enable sysvsem \
+    && docker-php-ext-install -j$(nproc) gd zip bcmath intl opcache sysvsem \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
