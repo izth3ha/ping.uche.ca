@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libbz2-dev \
     libzip-dev \
+    libicu-dev \
+    zlib1g-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd zip bcmath intl opcache \
     && pecl install sysvsem \
