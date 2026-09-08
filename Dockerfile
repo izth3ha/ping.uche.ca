@@ -24,7 +24,7 @@ WORKDIR /var/www/html
 COPY --chown=www-data:www-data . /var/www/html
 
 # Copy .env file to config directory (in case it wasn't copied)
-COPY --chown=www-data:www-data config/.env /var/www/html/config/.env 2>/dev/null || true
+COPY config/.env* /var/www/html/config/
 
 # Expose port
 EXPOSE 80
