@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8763:80"
+    volumes:
+      - ./config:/var/www/html/config
+      - ./src:/var/www/html/src
+      - ./templates:/var/www/html/templates
+      - ./webroot:/var/www/html/webroot
+      - ./vendor:/var/www/html/vendor
+      - ./logs:/var/www/html/logs
+      - ./db_data:/var/www/html/db_data
+    devices:
+      - "/dev/usb/lp0:/dev/usb/lp0:rwm"
+    env_file:
+      - .env
+    restart: unless-stopped
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    env_file:
+      - .env
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: unless-stopped
