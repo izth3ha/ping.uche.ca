@@ -20,11 +20,21 @@ COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www/html
 
+# Copy composer files first for better layer caching
+COPY composer.json composer.lock ./
+
+# Install Composer dependencies into the image
+RUN composer install --no-dev --no-interaction --no-scripts --prefer-dist --no-progress \
+    && composer clear-cache
+
 # Copy application files
 COPY --chown=www-data:www-data . /var/www/html
 
 # Copy .env file to config directory (in case it wasn't copied)
 COPY config/.env* /var/www/html/config/
+
+# Ensure runtime directories are writable by Apache
+RUN chown -R www-data:www-data /var/www/html
 
 # Expose port
 EXPOSE 80

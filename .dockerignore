@@ -1,0 +1,28 @@
+# Dependencies are installed inside the image via composer install
+vendor/
+
+# Runtime / transient directories
+logs/
+tmp/
+
+# Version control and tooling
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# Environment files (mounted separately at runtime)
+.env
+.env.*
+!.env.example
+
+# Local config overrides (mounted separately at runtime)
+config/app_local.php
+
+# Docs and tooling not needed at runtime
+README.md
+phpcs.xml
+psalm.xml
+phpstan.neon
+phpunit.xml.dist
+tests/

@@ -10,7 +10,6 @@ services:
       - ./src:/var/www/html/src
       - ./templates:/var/www/html/templates
       - ./webroot:/var/www/html/webroot
-      - ./vendor:/var/www/html/vendor
       - ./logs:/var/www/html/logs
       - ./db_data:/var/www/html/db_data
     devices:
