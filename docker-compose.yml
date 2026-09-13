@@ -10,7 +10,6 @@ services:
       - ./src:/var/www/html/src
       - ./templates:/var/www/html/templates
       - ./webroot:/var/www/html/webroot
-      - ./logs:/var/www/html/logs
       - ./db_data:/var/www/html/db_data
     devices:
       - "/dev/usb/lp0:/dev/usb/lp0:rwm"

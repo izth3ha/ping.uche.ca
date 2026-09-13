@@ -33,8 +33,16 @@ COPY --chown=www-data:www-data . /var/www/html
 # Copy .env file to config directory (in case it wasn't copied)
 COPY config/.env* /var/www/html/config/
 
-# Ensure runtime directories are writable by Apache
-RUN chown -R www-data:www-data /var/www/html
+# Ensure runtime directories exist and are writable by Apache
+# (CakePHP requires these specific writable subdirectories)
+RUN mkdir -p \
+        /var/www/html/logs \
+        /var/www/html/tmp/cache/models \
+        /var/www/html/tmp/cache/persistent \
+        /var/www/html/tmp/cache/views \
+        /var/www/html/tmp/sessions \
+        /var/www/html/tmp/tests \
+    && chown -R www-data:www-data /var/www/html
 
 # Expose port
 EXPOSE 80
