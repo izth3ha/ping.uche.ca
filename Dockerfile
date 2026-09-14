@@ -1,18 +1,9 @@
-FROM php:8.2-apache
+FROM cakephp:5.2-apache
 
-# Install required extensions
+# Install additional extensions
 RUN apt-get update && apt-get install -y \
     libusb-1.0-0-dev \
-    libjpeg-dev \
-    libpng-dev \
-    libfreetype6-dev \
-    libbz2-dev \
-    libzip-dev \
-    libicu-dev \
-    zlib1g-dev \
-    libmysqlclient-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd zip bcmath intl opcache sysvsem mysqli pdo_mysql \
+    && docker-php-ext-install -j$(nproc) zip bcmath \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
