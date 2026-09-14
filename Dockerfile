@@ -1,9 +1,12 @@
-FROM cakephp:5.2-apache
+FROM php:8.2-apache
 
-# Install additional extensions
+# Install required extensions
 RUN apt-get update && apt-get install -y \
     libusb-1.0-0-dev \
-    && docker-php-ext-install -j$(nproc) zip bcmath \
+    libmariadb-dev-compat \
+    libzip-dev \
+    zlib1g-dev \
+    && docker-php-ext-install -j$(nproc) mysqli pdo_mysql \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
