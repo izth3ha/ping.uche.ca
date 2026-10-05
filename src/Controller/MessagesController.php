@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\PrinterService;
+use Cake\Controller\Component;
 use Cake\Http\Response;
 
 class MessagesController extends AppController
