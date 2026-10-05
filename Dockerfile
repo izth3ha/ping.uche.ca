@@ -59,11 +59,7 @@ RUN mkdir -p \
 # Enable mod_rewrite and allow .htaccess overrides so CakePHP URL
 # rewriting (webroot/.htaccess) works inside the container.
 RUN a2enmod rewrite \
-    && printf '%s\n' \
-        '<Directory /var/www/html/webroot>' \
-        '    AllowOverride All' \
-        '    Require all granted' \
-        '</Directory>' \
+    && printf '<Directory /var/www/html/webroot>\n    AllowOverride All\n    Require all granted\n</Directory>\n' \
         > /etc/apache2/conf-available/cake-rewrite.conf \
     && a2enconf cake-rewrite
 
