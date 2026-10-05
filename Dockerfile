@@ -56,6 +56,17 @@ RUN mkdir -p \
         /var/www/html/tmp/tests \
     && chown -R www-data:www-data /var/www/html
 
+# Enable mod_rewrite and allow .htaccess overrides so CakePHP URL
+# rewriting (webroot/.htaccess) works inside the container.
+RUN a2enmod rewrite \
+    && printf '%s\n' \
+        '<Directory /var/www/html/webroot>' \
+        '    AllowOverride All' \
+        '    Require all granted' \
+        '</Directory>' \
+        > /etc/apache2/conf-available/cake-rewrite.conf \
+    && a2enconf cake-rewrite
+
 # Expose port
 EXPOSE 80
 
