@@ -1,12 +1,29 @@
 FROM php:8.2-apache
 
+# Set environment variable to allow Composer to run as root
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 # Install required extensions
 RUN apt-get update && apt-get install -y \
     libusb-1.0-0-dev \
     libmariadb-dev-compat \
     libzip-dev \
     zlib1g-dev \
-    && docker-php-ext-install -j$(nproc) mysqli pdo_mysql \
+    libgd-dev \
+    libicu-dev \
+    libfreetype6-dev \
+    libjpeg-dev \
+    libpng-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+        mysqli \
+        pdo_mysql \
+        gd \
+        zip \
+        bcmath \
+        intl \
+        opcache \
+        sysvsem \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
