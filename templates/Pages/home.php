@@ -8,7 +8,7 @@ $this->assign('title', 'Send Message to Printer');
 <h1><?= __('Submit Message to Printer') ?></h1>
 
 <div class="message-form">
-    <?= $this->Form->create() ?>
+    <?= $this->Form->create(null, ['url' => ['controller' => 'Messages', 'action' => 'add']]) ?>
     <fieldset>
         <legend><?= __('Enter your message') ?></legend>
         <?= $this->Form->control('content', ['rows' => '5', 'label' => __('Message Content')]) ?>
