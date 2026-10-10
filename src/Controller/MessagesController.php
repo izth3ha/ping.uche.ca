@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Entity\Message;
+
 use App\Service\PrinterService;
 use Cake\Controller\Component;
 use Cake\Http\Response;
@@ -38,7 +40,7 @@ class MessagesController extends AppController
      */
     public function add(): ?Response
     {
-        $message = $this->Messages->newEmptyMessage();
+        $message = $this->Messages->newEmptyEntity();
 
         if ($this->request->is('post')) {
             $message = $this->Messages->patchMessage($message, $this->request->getData());
