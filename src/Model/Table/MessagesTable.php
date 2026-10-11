@@ -33,7 +33,11 @@ class MessagesTable extends Table
      */
     public function buildSchema(TableSchemaInterface $schema): TableSchemaInterface
     {
-        return $schema->addColumn('content', 'text', [
+        $schema->addColumn('id', 'integer', [
+            'null' => false,
+            'autoIncrement' => true,
+        ])
+        ->addColumn('content', 'text', [
             'null' => false,
             'comment' => 'Message content to print',
         ])
@@ -59,7 +63,13 @@ class MessagesTable extends Table
             'null' => false,
             'default' => 'CURRENT_TIMESTAMP',
             'comment' => 'Last modification timestamp',
+        ])
+        ->addConstraint('primary', [
+            'type' => 'primary',
+            'columns' => ['id'],
         ]);
+
+        return $schema;
     }
 
     /**
